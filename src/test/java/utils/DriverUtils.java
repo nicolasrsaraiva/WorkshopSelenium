@@ -11,7 +11,8 @@ public class DriverUtils {
 	public static WebDriver getDriver() {
 		System.setProperty("webdriver.chrome.driver", "C:/drivers/chromedriver.exe");
 		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		driver.manage().window().maximize();
 		return driver;
 	}
 }
