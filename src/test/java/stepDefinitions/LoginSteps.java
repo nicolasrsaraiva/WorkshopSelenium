@@ -1,35 +1,50 @@
 package stepDefinitions;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
 import io.cucumber.java.pt.*;
+import utils.DriverUtils;
 
 public class LoginSteps {
-	@Dado("que eu informe o username")
-	public void que_eu_informe_o_username() {
-		System.out.println("Teste");
-	    
+	
+	WebDriver driver = DriverUtils.getDriver();
+	
+	@Dado("que eu esteja na pagina de login do sistema Sauce Demo")
+	public void queEuEstejaNaPaginaDeLoginDoSistemaSauceDemo() {
+		driver.get("https://www.saucedemo.com/");
+		driver.findElement(By.className("login_logo")).isDisplayed();
 	}
 
-	@Dado("informe a password")
-	public void informe_a_password() {
-		System.out.println("Teste");
-	  
+	@Quando("eu informar o username")
+	public void euInformarOUsername() {
+		driver.findElement(By.id("user-name")).sendKeys("standard_user");
+	}
+
+	@Quando("informar a password")
+	public void informarAPassword() {
+		driver.findElement(By.id("password")).sendKeys("secret_sauce");
 	}
 
 	@Quando("eu clicar no botao Login")
-	public void eu_clicar_no_botao_login() {
-		System.out.println("Teste");
-		
+	public void euClicarNoBotaoLogin() {
+		driver.findElement(By.name("login-button")).click();
 	}
 
 	@Entao("devo ser redirecionado para a tela de produtos")
-	public void devo_ser_redirecionado_para_a_tela_de_produtos() {
-		System.out.println("Teste");
-		
+	public void devoSerRedirecionadoParaATelaDeProdutos() {
+		driver.findElement(By.id("shopping_cart_container")).isDisplayed();
 	}
 
-	@Entao("deve aparecer uma mensagem de erro, informando que nao existe esse usuario com essa senha")
-	public void deve_aparecer_uma_mensagem_de_erro_informando_que_nao_existe_esse_usuario_com_essa_senha() {
-		System.out.println("Teste");
-		
+	@Quando("informar a password {int} incorreta")
+	public void informarAPasswordIncorreta(Integer senha) {
+		driver.findElement(By.id("password")).sendKeys(senha.toString());
 	}
+	@Entao("deve aparecer uma mensagem de erro, informando que nao existe esse usuario com essa senha")
+	public void deveAparecerUmaMensagemDeErroInformandoQueNaoExisteEsseUsuarioComEssaSenha() {
+		driver.findElement(By.xpath(
+				"//*[contains(text(), 'Epic sadface: Username and password do not match any user in this service')]")).isDisplayed();
+		driver.close();
+	}
+
 }
