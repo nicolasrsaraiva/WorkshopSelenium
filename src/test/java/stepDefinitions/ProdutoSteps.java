@@ -8,7 +8,7 @@ import utils.DriverUtils;
 
 public class ProdutoSteps {
 	WebDriver driver = DriverUtils.getDriver();
-	
+
 	@Dado("que o usuario esteja logado no sistema")
 	public void queOUsuarioEstejaLogadoNoSistema() throws InterruptedException {
 		driver.get("https://www.saucedemo.com/");
@@ -83,5 +83,35 @@ public class ProdutoSteps {
 	public void oProdutoDeveSerCompradoExibindoAMensagemDeConfirmacao() {
 		driver.findElement(By.xpath("//*[contains(text(), 'Thank you for your order!')]")).isDisplayed();
 		driver.close();
+	}
+
+	@Quando("eu clicao no botao Remove")
+	public void euClicaoNoBotaoRemove() {
+		driver.findElement(By.xpath("//*[contains(text(), 'Remove')]")).click();
+	}
+
+	@Entao("meu carrinho deve ficar vazio")
+	public void meuCarrinhoDeveFicarVazio() {
+		driver.findElement(By.className("shopping_cart_link")).isDisplayed();
+	}
+
+	@Quando("eu selecionar Sauce Labs Backpack da lista de produtos")
+	public void euSelecionarSauceLabsBackpackDaListaDeProdutos() {
+		driver.findElement(By.xpath("//*[contains(text(), 'Sauce Labs Backpack')]")).click();
+	}	
+
+	@Quando("clicar no botao Back to products")
+	public void clicarNoBotaoBackToProducts() {
+		driver.findElement(By.name("back-to-products")).click();
+	}
+
+	@Quando("clicar no botao Add to cart do produto Sauce Labs Bolt T-Shirt")
+	public void clicarNoBotaoAddToCartDoProdutoSauceLabsBoltTShirt() {
+		driver.findElement(By.id("add-to-cart-sauce-labs-bolt-t-shirt")).click();
+	}
+
+	@Entao("deve ser exibido dois produtos no icone do carrinho")
+	public void deveSerExibidoDoisProdutosNoIconeDoCarrinho() {
+		driver.findElement(By.xpath("*//span[@class='shopping_cart_badge' and contains(text(), '2')]"));
 	}
 }

@@ -8,7 +8,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/features", glue = {
-		"stepDefinitions" }, monochrome = true, tags = "@end2end", snippets = SnippetType.CAMELCASE, dryRun = false)
+		"stepDefinitions" }, monochrome = true, tags = "@doisProdutosadd", snippets = SnippetType.CAMELCASE, dryRun = false)
 public class TestRunner {
 
 }

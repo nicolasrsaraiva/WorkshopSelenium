@@ -24,6 +24,7 @@ Funcionalidade: Testar a operacao de login
       | "213213asdsd" |
       | "asdasd2313"  |
 
+  @logout
   Cenario: Realizar logout com suceso
     Dado que eu esteja na pagina de login do sistema Sauce Demo
     Quando eu informar o username
